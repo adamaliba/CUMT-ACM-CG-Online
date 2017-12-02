@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+int z=1;
+void bin(int leng)
+{
+	int i,t=1;
+	for(i=1;i<leng;i++)
+		t*=2;
+	z+=t;
+	if(leng>1)
+		bin(leng-1);
+	else
+		cout<<z;
+}
+int length(int n)
+{
+	int i=0;
+	while(n>0)
+	{
+		n=n/10;
+		i++;
+	}
+	return i;
+}
+int d(int s)
+{
+	int i=0;
+	while(s>0)
+	{
+		if(s%10!=1&&s%10!=0)
+			i++;
+		s/=10;
+	}
+	return i;
+}
+int main()
+{
+	int n,t=1,i=0,j,s=1,leng;
+	cin>>n;
+	leng=length(n);
+	for(j=1;j<leng;j++)
+	{	
+		s*=10;
+		z*=2;
+	}
+	if(s+s/5<n)
+		bin(leng-1);
+	else
+	{	
+		while(s<n)
+		{
+			if(t==-1)
+				s+=9;
+			else
+				s+=1;
+			if(d(s)==0&&s<=n)
+				i++;
+			t*=-1;
+		}
+		cout<<i+z;
+	}
+	return 0;
+}
